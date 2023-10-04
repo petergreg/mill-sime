@@ -1,8 +1,8 @@
 package fr.ippon.mill.farmer.infrastructure.primary;
 
-import fr.ippon.mill.farmer.application.FarmerService;
 import fr.ippon.mill.farmer.domain.Farmer;
 import fr.ippon.mill.farmer.domain.FarmerAlreadyExistsException;
+import fr.ippon.mill.farmer.domain.FarmerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
