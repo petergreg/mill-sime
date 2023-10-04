@@ -5,6 +5,9 @@ import fr.ippon.mill.farmer.domain.FarmerRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Component
 public class JpaFarmerRepository implements FarmerRepository {
 
@@ -12,6 +15,12 @@ public class JpaFarmerRepository implements FarmerRepository {
 
     public JpaFarmerRepository(FarmerEntityRepository farmerEntityRepository) {
         this.farmerEntityRepository = farmerEntityRepository;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Farmer> findByReference(UUID reference) {
+        return farmerEntityRepository.findByReference(reference.toString()).map(FarmerEntity::toDomain);
     }
 
     @Override

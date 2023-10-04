@@ -1,7 +1,10 @@
 package fr.ippon.mill.farmer.infrastructure.secondary;
 
+import fr.ippon.mill.farmer.domain.Farmer;
+
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "farmer")
@@ -81,5 +84,15 @@ public class FarmerEntity {
     @Override
     public int hashCode() {
         return Objects.hash(reference, email);
+    }
+
+    public Farmer toDomain() {
+        return new Farmer(
+                UUID.fromString(this.reference),
+                this.firstName,
+                this.lastName,
+                this.email,
+                this.phoneNumber
+        );
     }
 }
