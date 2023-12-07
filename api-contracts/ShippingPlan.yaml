@@ -1,0 +1,48 @@
+openapi: 3.0.3
+info:
+  title: Farmer API
+  description: Farmer API
+  version: 1.0.0
+servers:
+  - url: 'http//localhost:8080/api/shipping'
+paths:
+  /:
+    post:
+      summary: plan a shipping
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ShippingPlanRequest"
+
+      responses:
+        '201':
+          description: shipping planned
+        '400':
+          description: bad request
+        '409':
+          description: shipping plan already exists
+
+components:
+  schemas:
+    ShippingPlanRequest:
+      type: object
+      required:
+        - email
+        - cereal
+        - shippingDate
+      properties:
+        email:
+          type: string
+          format: email
+          description: Farmer email (unique for each farmer)
+        cereal:
+          type : string
+          description: type of cereal
+          enum: [BLE, AVOINE, ORGE, HOUBLON]
+        shippingDate:
+          type: string
+          format: date-time
+
+
