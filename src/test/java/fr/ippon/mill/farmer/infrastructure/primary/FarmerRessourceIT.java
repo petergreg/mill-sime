@@ -22,11 +22,11 @@ class FarmerRessourceIT {
     private MockMvc mockMvc;
 
     @Test
-    void should_create_new_farm() throws Exception {
+    void should_create_new_farmze() throws Exception {
         // Given
         String body = """
                 {
-                "email": "jean.dupont@fermier.fr",
+                "email": "jean.dupont2@fermier.fr",
                 "firstName": "Jean",
                 "lastName": "Dupont",
                 "phoneNumber": "+33 123456789"

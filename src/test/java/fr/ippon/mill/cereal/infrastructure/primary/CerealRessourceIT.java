@@ -1,6 +1,5 @@
 package fr.ippon.mill.cereal.infrastructure.primary;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -36,18 +35,18 @@ class CerealRessourceIT {
                 """));
 
         // When
-        mockMvc.perform(post("/api/cereals")
+        mockMvc.perform(post("/api/shipping")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .content("""
                                 {
-                                  "cereal": "WHEAT",
-                                  "farmerId": "a046b054-1eae-451d-afa1-8b3202f1902a",
-                                  "harvestDay": "2022-11-21",
-                                  "quantity": 7.23
+                                  "email": "jean.dupont@fermier.fr",
+                                  "cereal": "BLE",
+                                  "shippingDate": "2026-12-01T10:00:00Z"
                                 }
                                 """))
                 // Then
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
+
     }
 }
