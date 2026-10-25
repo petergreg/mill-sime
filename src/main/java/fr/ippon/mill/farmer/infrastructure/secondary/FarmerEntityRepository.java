@@ -13,4 +13,6 @@ public interface FarmerEntityRepository  extends JpaRepository<FarmerEntity, Lon
     boolean existsByEmail(String email);
 
     Optional<FarmerEntity> findByReference(String reference);
+
+    Optional<FarmerEntity> findByEmail(String email);
 }

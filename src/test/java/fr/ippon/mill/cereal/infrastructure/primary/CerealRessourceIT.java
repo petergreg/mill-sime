@@ -49,4 +49,26 @@ class CerealRessourceIT {
                 .andExpect(status().isCreated());
 
     }
+
+
+
+    @Test
+    void should_not_create_new_cereal_transaction_when_farmer_does_not_exist() throws Exception {
+
+
+        // When
+        mockMvc.perform(post("/api/shipping")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .characterEncoding(StandardCharsets.UTF_8)
+                        .content("""
+                                {
+                                  "email": "jean.dupont3@fermier.fr",
+                                  "cereal": "BLE",
+                                  "shippingDate": "2026-12-01T10:00:00Z"
+                                }
+                                """))
+                // Then
+                .andExpect(status().is(403));
+
+    }
 }

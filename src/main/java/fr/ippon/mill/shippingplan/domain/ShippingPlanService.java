@@ -1,21 +1,24 @@
 package fr.ippon.mill.shippingplan.domain;
 
+import fr.ippon.mill.farmer.domain.FarmerRepository;
 
-public class ShippingPlanService {
-    // private final ShippingPlanRepository shippingPlanRepository;
+public abstract class ShippingPlanService {
 
-    // protected ShippingPlanService(ShippingPlanRepository shippingPlanRepository) {
-    //     this.shippingPlanRepository = shippingPlanRepository;
-    // }
+    private final FarmerRepository farmerRepository;
+    private final ShippingPlanRepository shippingPlanRepository;
 
-    public String register(ShippingPlan shppingPlan) throws UnknownFarmerException, ShippingPlanAlreadyExistsException {
+    protected ShippingPlanService(FarmerRepository farmerRepository, ShippingPlanRepository shippingPlanRepository) {
+        this.farmerRepository = farmerRepository;
+        this.shippingPlanRepository = shippingPlanRepository;
+    }
 
-        // boolean alreadyExists = farmerRepository.exists(farmer.getEmail());
-        // if (alreadyExists) {
-        //     throw new FarmerAlreadyExistsException(farmer.getEmail());
-        // }
-        // this.farmerRepository.save(farmer);
-        // return farmer.getReference().toString();
-        return "OK";
+    public String register(ShippingPlan shippingPlan) throws UnknownFarmerException, ShippingPlanAlreadyExistsException {
+
+        boolean farmerExists = farmerRepository.exists(shippingPlan.getFarmerEmail());
+        if (!farmerExists) {
+            throw new UnknownFarmerException(shippingPlan.getFarmerEmail());
+        }
+        this.shippingPlanRepository.save(shippingPlan);
+        return shippingPlan.getReference().toString();
     }
 }
